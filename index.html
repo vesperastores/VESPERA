@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>Vespera Label Generator</title>
+
+<link
+rel="stylesheet"
+href="style.css"
+>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet"
+>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div>
+
+<h1>vespera</h1>
+
+<p>LABEL GENERATOR</p>
+
+</div>
+
+</div>
+
+<!-- LOGO -->
+
+<div class="card">
+
+<div class="card-title">
+
+YOUR SHOP LOGO
+
+</div>
+
+<div class="upload-box">
+
+<input
+type="file"
+id="logoUpload"
+accept="image/*"
+>
+
+</div>
+
+</div>
+
+<!-- SELLER -->
+
+<div class="card">
+
+<div class="card-title">
+
+FROM ADDRESS (SELLER)
+
+</div>
+
+<div class="seller-box">
+
+<h2>VESPERA</h2>
+
+<p>
+Anapparambil House,HMC Road,<br>
+palakkad, Kerala - 679536
+</p>
+
+<p>
++91 6235637741
+</p>
+
+</div>
+
+</div>
+
+<!-- CUSTOMER -->
+
+<div class="card">
+
+<div class="card-title">
+
+CUSTOMER (SHIP TO)
+
+</div>
+
+<div class="form-group">
+
+<label>Customer Name *</label>
+
+<input
+type="text"
+id="customerName"
+placeholder="Full name"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Address *</label>
+
+<textarea
+id="address"
+placeholder="House name, street, locality..."
+></textarea>
+
+</div>
+
+<div class="row">
+
+<div class="form-group">
+
+<label>District *</label>
+
+<input
+type="text"
+id="district"
+placeholder="e.g. Kozhikode"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>Pin Code *</label>
+
+<input
+type="text"
+id="pincode"
+placeholder="6 digits"
+>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label>Mobile Number</label>
+
+<input
+type="text"
+id="phone"
+placeholder="+91 XXXXX XXXXX"
+>
+
+</div>
+
+</div>
+
+<!-- ORDER DETAILS -->
+
+<div class="card">
+
+<div class="card-title">
+
+ORDER DETAILS
+
+</div>
+
+<div class="form-group">
+
+<label>DROPSHIPPER SERIAL NO. *</label>
+
+<input
+type="text"
+id="serial"
+placeholder="E.G. DS 12"
+>
+
+</div>
+
+<div class="form-group">
+
+<label>PRODUCT NAME</label>
+
+<input
+type="text"
+id="product"
+placeholder="e.g. Saree, Watch..."
+>
+
+</div>
+
+<div class="form-group">
+
+<label>PAYMENT TYPE *</label>
+
+<div class="payment-options">
+
+<label class="radio-box">
+
+<input
+type="radio"
+name="payment"
+value="COD"
+checked
+>
+
+COD
+
+</label>
+
+<label class="radio-box">
+
+<input
+type="radio"
+name="payment"
+value="PREPAID"
+>
+
+PREPAID
+
+</label>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label>ORDER VALUE (INR)</label>
+
+<input
+type="text"
+id="orderValue"
+placeholder="₹ 0"
+>
+
+</div>
+
+<button onclick="generatePDF()">
+Generate Single Label
+</button>
+
+<button onclick="addLabel()">
+Add Label
+</button>
+
+<button onclick="generateA4PDF()" style="margin-top:10px;">
+Generate A4 PDF
+</button>
+
+<p id="labelCount" style="text-align:center; margin-top:10px; color:#c8a96b; font-weight:600;">
+0 Labels Added
+</p>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
