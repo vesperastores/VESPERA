@@ -83,7 +83,7 @@ FS(5);
 doc.text(amountWords,X(72),Y(34),{align:"center"});
 
 // ORDER ID
-FS(8);
+FS(7);
 doc.text(`ORDER ID : ${data.serial}`,X(58),Y(40));
 
 doc.line(X(3),Y(45),X(97),Y(45));
