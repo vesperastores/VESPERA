@@ -3,7 +3,7 @@ const { jsPDF } = window.jspdf;
 let labels = [];
 
 function numberToWords(num){
-num = parseInt(num)  0;
+num = parseInt(num) || 0;
 
 const ones=["","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
 const tens=["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
@@ -18,14 +18,14 @@ return num.toString();
 function addLabel(){
 
 labels.push({
-customer: document.getElementById("customerName").value  "Customer",
-address: document.getElementById("address").value  "-",
-pin: document.getElementById("pincode").value  "-",
-phone: document.getElementById("phone").value  "-",
-product: document.getElementById("product").value  "Product",
-amount: document.getElementById("orderValue").value  "0",
-serial: document.getElementById("serial").value  "DS1",
-payment: document.querySelector('input[name="payment"]:checked')?.value  "COD"
+customer: document.getElementById("customerName").value || "Customer",
+address: document.getElementById("address").value || "-",
+pin: document.getElementById("pincode").value || "-",
+phone: document.getElementById("phone").value || "-",
+product: document.getElementById("product").value || "Product",
+amount: document.getElementById("orderValue").value || "0",
+serial: document.getElementById("serial").value || "DS1",
+payment: document.querySelector('input[name="payment"]:checked')?.value || "COD"
 });
   
 document.getElementById("labelCount").innerText =
@@ -103,22 +103,21 @@ doc.text("TO (BUYER)",X(58),Y(55));
 doc.setTextColor(0);
 
 // SELLER
-doc.setFont("helvetica","bold");
-FS(14);
-doc.text("SUFIYAN",X(8),Y(68));
-
+doc.setFont("helvetica", "bold");
+FS(10);
+doc.text("MOHAMMED SHAHABAS", X(8), Y(68));
 doc.setFont("helvetica","normal");
 FS(7);
 doc.text([
-"Anapparambil House",
-"Arakkal HMC Road",
-"Chalissery, Kerala - 679536"
+"Thevar parambil house",
+"Madathumpuram",
+"kokkur, Kerala - 679591"
 ],X(8),Y(77));
 
 doc.setFont("helvetica","bold");
-doc.text("PIN : 679536",X(8),Y(91));
-doc.text("PH : +91 8281088967",X(8),Y(97));
-doc.text("Customer id : 1265200969",X(8),Y(103));
+doc.text("PIN : 679591",X(8),Y(91));
+doc.text("PH : +91 8848574420",X(8),Y(97));
+doc.text("Customer id : 1420098452",X(8),Y(103));
 
 // BUYER
 doc.setFont("helvetica","bold");
@@ -162,4 +161,97 @@ FS(13);
 doc.text("ORDER TOTAL",X(8),Y(138));
 
 FS(16);
-doc.text(`INR ${data.am
+doc.text(`INR ${data.amount}`,X(92),Y(138),{align:"right"});
+
+doc.line(X(3),Y(143),X(97),Y(143));
+
+// RETURN + THANK YOU
+doc.line(X(50),Y(143),X(50),Y(160));
+
+FS(8);
+doc.text("RETURN ADDRESS",X(8),Y(149));
+
+FS(5);
+doc.text([
+"Name : Muhammed Shahabas",
+"Mobile : 8848574420",
+"Address : Thevar parambil(H)",
+"State : Kerala",
+"Pincode : 679591",
+"Area : Madathumpuram",
+"City : Kokkur"
+],X(8),Y(152));
+
+FS(10);
+doc.text("THANK YOU",X(63),Y(149));
+
+FS(7);
+doc.text("We deliver happiness!",X(63),Y(155));
+doc.text("www.vespera.in",X(63),Y(160));
+
+// FOOTER
+doc.setFillColor(0);
+doc.rect(X(3),Y(161),94*s,4*s,"F");
+
+}
+
+function generateA4PDF(){
+
+if(labels.length === 0){
+alert("Add at least one label first");
+return;
+}
+
+const doc = new jsPDF({
+orientation:"portrait",
+unit:"mm",
+format:"a4"
+});
+
+const positions = [
+[9,0],
+[114,0],
+[9,148.5],
+[114,148.5]
+];
+
+labels.forEach((label,index)=>{
+
+if(index > 0 && index % 4 === 0){
+doc.addPage();
+}
+
+const pos = positions[index % 4];
+
+drawLabel(doc,pos[0],pos[1],label);
+
+});
+
+doc.save("vespera-a4-labels.pdf");
+
+}
+
+function generatePDF(){
+
+const data = {
+customer: document.getElementById("customerName").value || "Customer",
+address: document.getElementById("address").value || "-",
+pin: document.getElementById("pincode").value || "-",
+phone: document.getElementById("phone").value || "-",
+product: document.getElementById("product").value || "Product",
+amount: document.getElementById("orderValue").value || "0",
+serial: document.getElementById("serial").value || "DS1",
+payment: document.querySelector('input[name="payment"]:checked')?.value || "COD"
+};
+
+const doc = new jsPDF({
+orientation:"portrait",
+unit:"mm",
+format:[100,170]
+});
+
+drawLabel(doc,0,0,data);
+
+doc.save(`shipping-label-${data.serial}.pdf`);
+
+}
