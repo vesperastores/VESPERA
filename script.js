@@ -104,10 +104,10 @@ doc.setTextColor(0);
 
 // SELLER
 doc.setFont("helvetica", "bold");
-FS(10);
+FS(11);
 doc.text("MOHAMMED SHAHABAS", X(8), Y(68));
 doc.setFont("helvetica","normal");
-FS(7);
+FS(8);
 doc.text([
 "Thevar parambil house",
 "Madathumpuram",
