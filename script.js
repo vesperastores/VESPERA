@@ -105,7 +105,7 @@ doc.setTextColor(0);
 // SELLER
 doc.setFont("helvetica", "bold");
 FS(11);
-doc.text("MOHAMMED SHAHABAS", X(8), Y(68));
+doc.text("SHAHABAS", X(8), Y(68));
 doc.setFont("helvetica","normal");
 FS(8);
 doc.text([
